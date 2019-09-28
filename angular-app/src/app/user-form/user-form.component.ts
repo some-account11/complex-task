@@ -95,7 +95,7 @@ export class UserFormComponent implements OnInit {
         lastName.style.borderColor = 'black';
         email.style.borderColor = 'black';
         password.style.borderColor = 'black';
-      }, 500);
+      }, 400);
     }
   }
 }
