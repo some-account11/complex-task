@@ -5,6 +5,10 @@ const PORT = 3000;
 let feedback = undefined;
 const nodemailer = require('nodemailer');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+
 const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
@@ -25,8 +29,6 @@ const mailer = message => {
     });
 };
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.post('/data', (req, res) => {
