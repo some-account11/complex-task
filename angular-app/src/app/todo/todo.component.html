@@ -1,9 +1,9 @@
 <h1>To Do List</h1>
 <mat-list #todo>
-  <mat-list-item *ngFor="let todo of todoList" let row="index">
+  <mat-list-item *ngFor="let todo of todoList; index as i">
     <mat-icon matListIcon>{{listStatus}}</mat-icon>
    <span>{{todo}}</span>
-    <button mat-raised-button color="primary" (click)="changeStatus()">{{taskStatus}}</button>
+    <button mat-raised-button color="primary" (click)="changeStatus(i)">{{taskStatus}}</button>
     <button mat-raised-button color="accent">Delete</button>
   </mat-list-item>
 </mat-list>

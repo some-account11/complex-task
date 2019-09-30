@@ -11,8 +11,9 @@ export class TodoComponent {
   taskStatus: string = 'DONE'
   todoList: string[] = ['Learn HTML', 'Learn CSS', 'Learn JS', 'Learn Angular'];
 
-  changeStatus(){
-    this.taskStatus = 'DO IT!!!'
+  changeStatus(i){
+    console.log(i);
+    // this.taskStatus. [i] = 'DO IT!!!'
   }
 
 }
