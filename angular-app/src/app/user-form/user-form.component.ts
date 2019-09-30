@@ -83,6 +83,7 @@ export class UserFormComponent implements OnInit {
       });
       // Push to Data Service
       this.dataService.addData(this.user);
+      console.log(this.dataService.getData());
       // Alert
       setTimeout(() => {
         alert('New User Added !!!');
