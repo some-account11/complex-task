@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = 3000;
-let feedback = undefined;
+//let feedback = undefined;
 const nodemailer = require('nodemailer');
 
 app.use(bodyParser.json());
@@ -25,9 +25,11 @@ const transporter = nodemailer.createTransport({
 const mailer = message => {
     transporter.sendMail(message, (err, info) => {
         if (err) return console.log(err)
-        alert('You left a feedback', info);
+        console.log('You left a feedback', info);
     });
 };
+
+
 
 
 
@@ -39,22 +41,22 @@ app.post('/data', (req, res) => {
         subject: `Feedback info`,
         html: `<h3>Thank you for your feedback. It's very important for us</h3>
                 <p>We received your feedback</p>
-                <span>${req.body.feedback}</span>`
+                <span>${req.body.comment}</span>`
     };
     const messageToAdmin = {
         to: 'kuryloff@gmail.com',
         subject: `Feedback info`,
         html: `<h3>Feedback received</h3>
                <span><b>From:</b>${req.body.email}</span><br>
-               <span>${req.body.feedback}</span>`
+               <span>${req.body.comment}</span>`
     };
     mailer(messageToClient);
     mailer(messageToAdmin);
-    feedback = req.body;
-    console.log(req.body);
-    // res.redirect('/feedback');
+    //feedback = req.body;
+    // console.log(req.body);
+    // res.redirect('/feedback-form');
     // res.send('Thank you for your feedback. You will receive info about it on your email: ${req.feedback.email}');
-    feedback = undefined;
+    //feedback = undefined;
 });
 
 
