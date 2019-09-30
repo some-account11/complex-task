@@ -10,22 +10,25 @@ export class UserCatalogComponent implements OnInit, OnChanges {
   term: string = '';
   users: any = [];
   newUser: any;
-  constructor(public userCatalogService: UserCatalogService) { }
+
+  constructor(public userCatalogService: UserCatalogService) {
+  }
 
   ngOnInit() {
-    this.userCatalogService.getUsers().subscribe( users => {
-      this.users = users.map(user=>{
+    this.userCatalogService.getUsers().subscribe((users: any[]) => {
+      this.users = users.map(user => {
         return {'name': user['name'], 'username': user['username'], 'email': user['name'], 'phone': user['phone']};
       });
-    })
+      console.log(this.users);
+    });
 
-    this.userCatalogService.newUserSubject$.subscribe( newUser=>{
+    this.userCatalogService.newUserSubject$.subscribe(newUser => {
       this.newUser = newUser;
     })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.newUser.currentValue) {
+    if (this.newUser.currentValue) {
       this.users.push(this.newUser.currentValue);
     }
   }
