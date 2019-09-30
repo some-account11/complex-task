@@ -1,1 +1,9 @@
-<p>todo works!</p>
+<h1>To Do List</h1>
+<mat-list #todo>
+  <mat-list-item *ngFor="let todo of todoList" let row="index">
+    <mat-icon matListIcon>{{listStatus}}</mat-icon>
+   <span>{{todo}}</span>
+    <button mat-raised-button color="primary" (click)="changeStatus()">{{taskStatus}}</button>
+    <button mat-raised-button color="accent">Delete</button>
+  </mat-list-item>
+</mat-list>
