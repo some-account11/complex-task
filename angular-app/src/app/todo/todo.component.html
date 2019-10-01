@@ -1,6 +1,6 @@
 <h1>To Do List</h1>
 <mat-form-field appearance="outline">
-  <mat-label>Add new task</mat-label>
+  <mat-label>{{inputLabel}}</mat-label>
   <input matInput>
 </mat-form-field>
 <button  id="addButton" mat-raised-button color="accent">{{formButton}}</button>
@@ -11,7 +11,7 @@
       <mat-icon matListIcon>{{todo.listStatus}}</mat-icon>
       <span>{{todo.taskName}}</span>
       <span>{{todo.taskStatus}}</span>
-      <button class="edit" mat-raised-button color="primary" (click)="changeStatus(i, todo.taskName)">Edit</button>
+      <button class="edit" mat-raised-button color="primary" (click)="changeTask(i, todo.taskName)">Edit</button>
       <button mat-raised-button color="warn" (click)="deleteRow(i)">Delete</button>
     </div>
   </mat-list-option>
