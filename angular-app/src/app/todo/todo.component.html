@@ -1,9 +1,18 @@
 <h1>To Do List</h1>
-<mat-list #todo>
-  <mat-list-item *ngFor="let todo of todoList; index as i">
-    <mat-icon matListIcon>{{listStatus}}</mat-icon>
-   <span>{{todo}}</span>
-    <button mat-raised-button color="primary" (click)="changeStatus(i)">{{taskStatus}}</button>
-    <button mat-raised-button color="accent">Delete</button>
-  </mat-list-item>
-</mat-list>
+<mat-form-field appearance="outline">
+  <mat-label>Add new task</mat-label>
+  <input matInput>
+</mat-form-field>
+<button  id="addButton" mat-raised-button color="accent">{{formButton}}</button>
+
+<mat-selection-list #todosList>
+  <mat-list-option *ngFor="let todo of tasks; index as i" [selected]="todo.selected" (click)="selected(i)">
+    <div id="mat-list-text">
+      <mat-icon matListIcon>{{todo.listStatus}}</mat-icon>
+      <span>{{todo.taskName}}</span>
+      <span>{{todo.taskStatus}}</span>
+      <button class="edit" mat-raised-button color="primary" (click)="changeStatus(i, todo.taskName)">Edit</button>
+      <button mat-raised-button color="warn" (click)="deleteRow(i)">Delete</button>
+    </div>
+  </mat-list-option>
+</mat-selection-list>
