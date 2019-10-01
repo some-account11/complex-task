@@ -2,7 +2,6 @@ const express = require('express')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = 3000;
-//let feedback = undefined;
 const nodemailer = require('nodemailer');
 
 app.use(bodyParser.json());
@@ -25,16 +24,10 @@ const transporter = nodemailer.createTransport({
 const mailer = message => {
     transporter.sendMail(message, (err, info) => {
         if (err) return console.log(err)
-        console.log('You left a feedback', info);
     });
 };
 
-
-
-
-
 app.post('/data', (req, res) => {
-    console.log(req.body);
     if (!req.body.email) return res.sendStatus(400);
     const messageToClient = {
         to: req.body.email,
@@ -52,19 +45,9 @@ app.post('/data', (req, res) => {
     };
     mailer(messageToClient);
     mailer(messageToAdmin);
-    //feedback = req.body;
-    // console.log(req.body);
-    // res.redirect('/feedback-form');
-    // res.send('Thank you for your feedback. You will receive info about it on your email: ${req.feedback.email}');
-    //feedback = undefined;
 });
-
 
 app.listen(PORT, () =>
     console.log(`Server listening at http://localhost:${PORT}/data`))
 
-//Myhailo
-// postData(): Observable<any> {
-//     return this.http.post(this.url, this.myForm.value, {responseType: 'json'});
-//   }
 
