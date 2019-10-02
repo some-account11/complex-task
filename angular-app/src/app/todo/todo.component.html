@@ -1,11 +1,13 @@
 <h1>To Do List</h1>
+<form [formGroup]="taskInput" (submit)="onSubmit()">
 <mat-form-field appearance="outline">
   <mat-label>{{inputLabel}}</mat-label>
-  <input matInput>
+  <input matInput formControlName="inputField">
 </mat-form-field>
 <button  id="addButton" mat-raised-button color="accent">{{formButton}}</button>
+</form>
 
-<mat-selection-list #todosList>
+<mat-selection-list id="todosList">
   <mat-list-option *ngFor="let todo of tasks; index as i" [selected]="todo.selected" (click)="selected(i)">
     <div id="mat-list-text">
       <mat-icon matListIcon>{{todo.listStatus}}</mat-icon>

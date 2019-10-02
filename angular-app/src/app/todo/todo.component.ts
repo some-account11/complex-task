@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 interface todoList {
@@ -45,45 +46,80 @@ const TodoList: todoList[] = [
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
+  taskInput: FormGroup;
   tasks = TodoList;
   formButton = 'Add task';
   inputLabel = 'Add new task';
+  newTask: any;
+  tempIndex: number;
 
-  changeTask(index, inputTaskName){
+  constructor(private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+    this.taskInput = this.formBuilder.group({
+      inputField: ['', Validators.required]
+    })
+  }
+
+  changeTask(index: number, inputTaskName: string) {
     this.tasks[index].onEdit = !this.tasks[index].onEdit;
-    // if (this.tasks[index].onEdit){
-    //   this.formButton = 'Edit task';
-    //   this.inputLabel = 'Edit task';
-    //   this.tasks[index].taskStatus = 'Editing...';
-    // } else{
-    //   this.formButton = 'Add task';
-    //   this.inputLabel = 'Add new task';
-    //   this.tasks[index].taskStatus = 'In progress';
-    // }
+    this.taskInput.setValue({inputField:inputTaskName});
+    this.tempIndex = index;
+    for (let i = 0; i < this.tasks.length; i++){
+      document.getElementsByClassName('edit')[i].setAttribute('disabled', 'true');
+    }
+  }
 
+  deleteRow(i) {
+    this.tasks.splice(i, 1);
   }
-//todo  this.tasks[index].onEdit = !this.tasks[index].onEdit ON SAVE BUTTON!!!
-  deleteRow(i){
-    this.tasks.splice(i,1);
-  }
-  selected(index){
+
+  selected(index) {
     this.tasks[index].selected = !this.tasks[index].selected;
-    if (this.tasks[index].selected == true && this.tasks[index].onEdit == false){
+    if (this.tasks[index].selected && !this.tasks[index].onEdit) {
       this.tasks[index].taskStatus = 'Done !!!';
       this.tasks[index].listStatus = 'done_outline';
-      document.getElementsByClassName('edit')[index].setAttribute('disabled','true');
-    } else if(this.tasks[index].selected && this.tasks[index].onEdit){
+      document.getElementsByClassName('edit')[index].setAttribute('disabled', 'true');
+    } else if (this.tasks[index].selected && this.tasks[index].onEdit) {
       this.formButton = 'Edit task';
       this.inputLabel = 'Edit task';
       this.tasks[index].taskStatus = 'Editing...';
       this.tasks[index].listStatus = 'edit';
+      document.getElementById('todosList').setAttribute('disabled', 'true');
     } else {
       this.tasks[index].taskStatus = 'In progress';
       this.tasks[index].listStatus = 'notification_important';
       document.getElementsByClassName('edit')[index].removeAttribute('disabled');
     }
-}
+  }
 
+  onSubmit() {
+    if (this.taskInput.invalid) {
+      return;
+    } else if (!this.taskInput.invalid && this.formButton === 'Add task') {
+      this.newTask = {
+        taskName: this.taskInput.value.inputField,
+        taskStatus: 'In progress',
+        listStatus: 'notification_important',
+        selected: false,
+        onEdit: false
+      };
+      this.tasks.push(this.newTask);
+    } else {
+      this.tasks[this.tempIndex].taskName = this.taskInput.value.inputField;
+      this.tasks[this.tempIndex].onEdit = !this.tasks[this.tempIndex].onEdit;
+      this.tasks[this.tempIndex].taskStatus = 'In progress';
+      this.tasks[this.tempIndex].listStatus = 'notification_important';
+      this.tasks[this.tempIndex].selected = !this.tasks[this.tempIndex].selected;
+      this.formButton = 'Add task';
+      this.inputLabel = 'Add new task';
+      for (let i = 0; i < this.tasks.length; i++){
+        document.getElementsByClassName('edit')[i].removeAttribute('disabled');
+      }
+    }
+    this.taskInput.reset();
+  }
 }
 
