@@ -11,23 +11,24 @@ const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'ottis.hamill38@ethereal.email',
-            pass: 'FQXvwCaW1GpmuUWRy8'
+            user: 'camryn.bernier@ethereal.email',
+            pass: 'YfhGsas1BNkY8Ny2f2'
         }
     },
     {
-        from: 'Feedback-service <ottis.hamill38@ethereal.email>',
+        from: 'Feedback-service <camryn.bernier@ethereal.email>',
     }
 );
 
 const mailer = message => {
     transporter.sendMail(message, (err, info) => {
         if (err) return console.log(err)
+        console.log(info);
     });
 };
 
 app.post('/data', (req, res) => {
-    if (!req.body.email) return res.sendStatus(400);
+   if (!req.body.email) return res.sendStatus(400);
     const messageToClient = {
         to: req.body.email,
         subject: `Feedback info`,
@@ -47,6 +48,6 @@ app.post('/data', (req, res) => {
 });
 
 app.listen(PORT, () =>
-    console.log(`Server listening at http://localhost:${PORT}/data`))
+    console.log(`Server listening at http://localhost:${PORT}`))
 
 
