@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-
 const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
@@ -23,13 +22,13 @@ const transporter = nodemailer.createTransport({
     }
 );
 
-const mailer = message => {
-    transporter.sendMail(message, (err, info) => {
+const mailer = async (message) => {
+    await transporter.sendMail(message, (err, info) => {
         if (err) return console.log(err)
     });
 };
 
-app.post('/data', (req, res) => {
+app.post('/data', async (req, res) => {
     if (!req.body.email) return res.sendStatus(400);
     const messageToClient = {
         to: req.body.email,
@@ -45,8 +44,8 @@ app.post('/data', (req, res) => {
                <span><b>From:</b>${req.body.email}</span><br>
                <span>${req.body.comment}</span>`
     };
-    mailer(messageToClient);
-    mailer(messageToAdmin);
+    await mailer(messageToClient);
+    await mailer(messageToAdmin);
 });
 
 app.listen(PORT, () =>
