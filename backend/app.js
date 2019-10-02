@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const PORT = 3000;
 const nodemailer = require('nodemailer');
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 
 const transporter = nodemailer.createTransport({
