@@ -8,15 +8,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        //host: 'smtp.ethereal.email',
+        host: 'smtp.gmail.com',
         port: 587,
         auth: {
-            user: 'ottis.hamill38@ethereal.email',
-            pass: 'FQXvwCaW1GpmuUWRy8'
+            user: 'kuryloff@gmail.com',
+            pass: '529998kuryloff'
         }
     },
     {
-        from: 'Feedback-service <ottis.hamill38@ethereal.email>',
+        from: 'Feedback-service',
     }
 );
 
