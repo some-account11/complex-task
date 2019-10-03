@@ -17,7 +17,6 @@ export class UserCatalogComponent implements OnInit {
 
   ngOnInit() {
     this.userCatalogService.getUsers().subscribe((users: any[]) => {
-      debugger;
       this.users = users.map(user => {
         return {
           'firstName': user['name'].split(' ', 1),
@@ -26,7 +25,6 @@ export class UserCatalogComponent implements OnInit {
           'password': user['phone']
         };
       });
-      console.log(this.users);
     });
 
     this.userCatalogService.newUserSubject$.subscribe((newUser: User) => {
