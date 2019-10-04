@@ -23,10 +23,9 @@ export class UserCatalogComponent implements OnInit {
           'firstName': user['name'].split(' ', 1),
           'lastName': user['name'].split(' ', 2)[1],
           'email': user['name'],
-          'password': user['phone']
+          'password': user['phone'].replace(/[.x ()[-]/g, ''),
         };
       });
-      console.log(this.users);
     });
 
     this.userCatalogService.newUserSubject$.subscribe((newUser: User) => {
