@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const PORT = 3000;
 const nodemailer = require('nodemailer');
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 const transporter = nodemailer.createTransport({
-        //host: 'smtp.ethereal.email',
         host: 'smtp.gmail.com',
         port: 587,
         auth: {
@@ -48,6 +50,6 @@ app.post('/data', async (req, res) => {
 });
 
 app.listen(PORT, () =>
-    console.log(`Server listening at http://localhost:${PORT}/data`))
+    console.log(`Server listening at http://localhost:${PORT}`))
 
 
