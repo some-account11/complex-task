@@ -1,15 +1,11 @@
-<h1>
-  Complex task
-</h1>
+<nav>
+  <ul>
+    <li routerLink="/user-catalog">User Catalog</li>
+    <li disabled="true" routerLink="" >User Form</li>
+    <li routerLink="/feedback" >NodeMailer Form</li>
+    <li routerLink="/todo-list" >Todo List</li>
+  </ul>
+</nav>
 
-<ul>
-  <li>1.User catalog</li>
-  <li>2.User form</li>
-  <li>3.Nodemailer</li>
-  <li>4.Todo list</li>
-  <li>5.Feedback Form</li>
-</ul>
-<hr/>
-<app-user-form></app-user-form>
-
+<router-outlet></router-outlet>
 

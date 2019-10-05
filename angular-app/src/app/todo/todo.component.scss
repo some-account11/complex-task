@@ -1,0 +1,29 @@
+h1 {
+  text-align: center;
+}
+#mat-list-text {
+  display: flex;
+  flex-direction: row;
+}
+span {
+  width: 30%;
+}
+button {
+  width: 100px;
+  padding-right: 23px;
+  margin-left: 7%;
+  text-align: center;
+}
+span {
+  font-size: 25px;
+}
+mat-form-field {
+  width: 70%;
+  margin-left: 5%;
+}
+#addButton {
+  width: 150px;
+  height: 50px;
+  font-size: 1.9rem;
+}
+

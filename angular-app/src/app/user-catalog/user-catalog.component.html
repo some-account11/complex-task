@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="term" placeholder="Search..">
+  </div>
+
+<table class="table" id="dtBasicExample">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Password</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users | filter:term; index as i">
+    <td>{{ i + 1 }}</td>
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.password }}</td>
+  </tr>
+  </tbody>
+</table>
+</div>
