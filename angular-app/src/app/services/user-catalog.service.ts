@@ -16,7 +16,7 @@ export class UserCatalogService {
     return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
 
-  sendNewUser(user: User) {
+  sendNewUser(user: any) {
     this.newUserSubject$.next(user);
   }
 

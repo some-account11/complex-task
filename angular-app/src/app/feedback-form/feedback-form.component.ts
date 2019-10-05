@@ -29,7 +29,9 @@ export class FeedbackFormComponent {
 
   onSubmit() {
     if (this.angForm.value) {
+      debugger;
       this.emailService.postData(this.url, this.angForm.value).subscribe((result) => {
+        debugger;
         console.log(result);
         this.angForm.reset();
       });
