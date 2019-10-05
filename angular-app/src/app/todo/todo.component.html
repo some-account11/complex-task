@@ -1,10 +1,12 @@
 <h1>To Do List</h1>
-<form [formGroup]="taskInput" (submit)="onSubmit()">
-<mat-form-field appearance="outline">
-  <mat-label>{{inputLabel}}</mat-label>
-  <input matInput formControlName="inputField">
-</mat-form-field>
-<button  id="addButton" mat-raised-button color="accent">{{formButton}}</button>
+<form [formGroup]="form" (submit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>{{inputLabel}}</mat-label>
+    <input matInput formControlName="inputField">
+  </mat-form-field>
+  <button id="addButton" mat-raised-button color="accent" [disabled]="!form.controls['inputField'].value">
+    {{formButton}}
+  </button>
 </form>
 
 <mat-selection-list id="todosList">

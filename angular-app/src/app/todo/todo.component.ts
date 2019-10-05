@@ -47,7 +47,7 @@ const TodoList: todoList[] = [
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  taskInput: FormGroup;
+  form: FormGroup;
   tasks = TodoList;
   formButton = 'Add task';
   inputLabel = 'Add new task';
@@ -58,14 +58,14 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskInput = this.formBuilder.group({
-      inputField: ['', Validators.required]
+    this.form = this.formBuilder.group({
+      inputField: ['']
     })
   }
 
   changeTask(index: number, inputTaskName: string) {
     this.tasks[index].onEdit = !this.tasks[index].onEdit;
-    this.taskInput.setValue({inputField:inputTaskName});
+    this.form.setValue({inputField:inputTaskName});
     this.tempIndex = index;
     for (let i = 0; i < this.tasks.length; i++){
       document.getElementsByClassName('edit')[i].setAttribute('disabled', 'true');
@@ -96,19 +96,19 @@ export class TodoComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.taskInput.invalid) {
+    if (this.form.invalid) {
       return;
-    } else if (!this.taskInput.invalid && this.formButton === 'Add task') {
-      this.newTask = {
-        taskName: this.taskInput.value.inputField,
-        taskStatus: 'In progress',
-        listStatus: 'notification_important',
-        selected: false,
-        onEdit: false
-      };
-      this.tasks.push(this.newTask);
+    } else if (!this.form.invalid && this.formButton === 'Add task') {
+        this.newTask = {
+          taskName: this.form.value.inputField,
+          taskStatus: 'In progress',
+          listStatus: 'notification_important',
+          selected: false,
+          onEdit: false
+        };
+        this.tasks.push(this.newTask);
     } else {
-      this.tasks[this.tempIndex].taskName = this.taskInput.value.inputField;
+      this.tasks[this.tempIndex].taskName = this.form.value.inputField;
       this.tasks[this.tempIndex].onEdit = !this.tasks[this.tempIndex].onEdit;
       this.tasks[this.tempIndex].taskStatus = 'In progress';
       this.tasks[this.tempIndex].listStatus = 'notification_important';
@@ -119,7 +119,9 @@ export class TodoComponent implements OnInit {
         document.getElementsByClassName('edit')[i].removeAttribute('disabled');
       }
     }
-    this.taskInput.reset();
+
+    this.form.controls.inputField.setValue('');
+    // this.form.controls.inputField.markAsDirty({onlySelf:true});
   }
 }
 
