@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserCatalogService} from "../user-catalog.service";
+import {UserCatalogService} from "../services/user-catalog.service";
 import {User} from "../interfaces/user-interface";
 
 @Component({
@@ -29,6 +29,6 @@ export class UserCatalogComponent implements OnInit {
 
     this.userCatalogService.newUserSubject$.subscribe((newUser: User) => {
       this.users.push(newUser);
-    })
+    });
   }
 }

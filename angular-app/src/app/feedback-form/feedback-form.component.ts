@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Observable} from 'rxjs/internal/Observable';
-import {HttpClient} from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient } from '@angular/common/http';
+import { EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -11,7 +12,10 @@ import {HttpClient} from '@angular/common/http';
 export class FeedbackFormComponent {
   angForm: FormGroup;
   url: string;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+
+  constructor(private formBuilder: FormBuilder,
+              private http: HttpClient,
+              public emailService: EmailService) {
     this.createForm();
     this.url = 'http://localhost:3000/data';
   }
@@ -19,19 +23,16 @@ export class FeedbackFormComponent {
   createForm() {
     this.angForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      comment: ['', [Validators.required]],
+      comment: [''],
     });
   }
 
   onSubmit() {
     if (this.angForm.value) {
-      this.postData().subscribe();
-      this.angForm.reset();
-      alert('Thank you');
+      this.emailService.postData(this.url, this.angForm.value).subscribe((result) => {
+        console.log(result);
+        this.angForm.reset();
+      });
     }
-  }
-
-  postData(): Observable<any> {
-    return this.http.post(this.url, this.angForm.value, {responseType: 'text'});
   }
 }
