@@ -17,6 +17,7 @@ export class UserFormComponent implements OnInit {
   }
 
   create() {
+
     //DOM
     let firstName         = document.querySelector('#first-name'),
         lastName          = document.querySelector('#last-name'),
@@ -34,7 +35,6 @@ export class UserFormComponent implements OnInit {
         checkLastName     = false,
         checkEmail        = false,
         checkPassword     = false;
-
     // Check First Name
     if(firstName.value == '') {
       firstName.style.borderColor = 'red';
@@ -43,7 +43,6 @@ export class UserFormComponent implements OnInit {
       firstName.style.borderColor = 'green';
       firstNameSubtitle.innerHTML = '';
       checkFirstName = true;
-
     }
     // Check Last Name
     if(lastName.value == '') {
@@ -72,7 +71,6 @@ export class UserFormComponent implements OnInit {
       passwordSubtitle.innerHTML = '';
       checkPassword = true;
     }
-
     // Check All
     if(checkFirstName && checkLastName && checkEmail && checkPassword) {
       this.user.push({
