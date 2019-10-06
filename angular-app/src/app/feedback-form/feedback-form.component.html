@@ -17,7 +17,7 @@
     <label for="comment">Comment: </label>
     <textarea class="form-control" formControlName="comment" id="comment"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="angForm.invalid" >
+  <button class="btn btn-primary" [disabled]="angForm.invalid">
     Send
   </button>
 </form>
