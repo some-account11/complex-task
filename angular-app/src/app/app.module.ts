@@ -16,12 +16,14 @@ import { MatInputModule } from "@angular/material"
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserCatalogComponent,
+    UserFormComponent,
     UserCatalogComponent,
     FeedbackFormComponent,
     TodoComponent

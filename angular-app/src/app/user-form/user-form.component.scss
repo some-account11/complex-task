@@ -1,0 +1,30 @@
+input.ng-touched.ng-invalid {border:solid red 2px;}
+input.ng-touched.ng-valid {border:solid green 2px;}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border: 2px solid black;
+  margin: 20px auto;
+  font-family: verdana;
+  border-radius: 15px;
+
+  h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    width: 200px;
+    height: 60px;
+    border: 2px solid black;
+    background-color: silver;
+  }
+}

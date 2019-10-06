@@ -20,4 +20,9 @@ export class UserCatalogService {
     this.newUserSubject$.next(user);
   }
 
+  addUser(user: any) {
+    this.newUserSubject$.subscribe(user);
+    console.log(user);
+    console.log(this.newUserSubject$);
+  }
 }

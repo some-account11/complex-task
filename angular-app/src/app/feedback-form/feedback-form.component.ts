@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { EmailService } from '../services/email.service';
 
@@ -29,10 +28,7 @@ export class FeedbackFormComponent {
 
   onSubmit() {
     if (this.angForm.value) {
-      debugger;
       this.emailService.postData(this.url, this.angForm.value).subscribe((result) => {
-        debugger;
-        console.log(result);
         this.angForm.reset();
       });
     }
